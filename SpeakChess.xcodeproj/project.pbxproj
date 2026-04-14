@@ -1,0 +1,555 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		2ED674E82F8EFF9A00C4312B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ED674CD2F8EFF9800C4312B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2ED674D42F8EFF9800C4312B;
+			remoteInfo = SpeakChess;
+		};
+		2ED674F22F8EFF9A00C4312B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2ED674CD2F8EFF9800C4312B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2ED674D42F8EFF9800C4312B;
+			remoteInfo = SpeakChess;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2ED674D52F8EFF9800C4312B /* SpeakChess.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeakChess.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ED674E72F8EFF9A00C4312B /* SpeakChessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeakChessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2ED674F12F8EFF9A00C4312B /* SpeakChessUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpeakChessUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		2ED674D72F8EFF9800C4312B /* SpeakChess */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SpeakChess;
+			sourceTree = "<group>";
+		};
+		2ED674EA2F8EFF9A00C4312B /* SpeakChessTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SpeakChessTests;
+			sourceTree = "<group>";
+		};
+		2ED674F42F8EFF9A00C4312B /* SpeakChessUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = SpeakChessUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2ED674D22F8EFF9800C4312B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ED674E42F8EFF9A00C4312B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ED674EE2F8EFF9A00C4312B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2ED674CC2F8EFF9800C4312B = {
+			isa = PBXGroup;
+			children = (
+				2ED674D72F8EFF9800C4312B /* SpeakChess */,
+				2ED674EA2F8EFF9A00C4312B /* SpeakChessTests */,
+				2ED674F42F8EFF9A00C4312B /* SpeakChessUITests */,
+				2ED674D62F8EFF9800C4312B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2ED674D62F8EFF9800C4312B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2ED674D52F8EFF9800C4312B /* SpeakChess.app */,
+				2ED674E72F8EFF9A00C4312B /* SpeakChessTests.xctest */,
+				2ED674F12F8EFF9A00C4312B /* SpeakChessUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2ED674D42F8EFF9800C4312B /* SpeakChess */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2ED674FB2F8EFF9A00C4312B /* Build configuration list for PBXNativeTarget "SpeakChess" */;
+			buildPhases = (
+				2ED674D12F8EFF9800C4312B /* Sources */,
+				2ED674D22F8EFF9800C4312B /* Frameworks */,
+				2ED674D32F8EFF9800C4312B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				2ED674D72F8EFF9800C4312B /* SpeakChess */,
+			);
+			name = SpeakChess;
+			packageProductDependencies = (
+			);
+			productName = SpeakChess;
+			productReference = 2ED674D52F8EFF9800C4312B /* SpeakChess.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2ED674E62F8EFF9A00C4312B /* SpeakChessTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2ED674FE2F8EFF9A00C4312B /* Build configuration list for PBXNativeTarget "SpeakChessTests" */;
+			buildPhases = (
+				2ED674E32F8EFF9A00C4312B /* Sources */,
+				2ED674E42F8EFF9A00C4312B /* Frameworks */,
+				2ED674E52F8EFF9A00C4312B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2ED674E92F8EFF9A00C4312B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2ED674EA2F8EFF9A00C4312B /* SpeakChessTests */,
+			);
+			name = SpeakChessTests;
+			packageProductDependencies = (
+			);
+			productName = SpeakChessTests;
+			productReference = 2ED674E72F8EFF9A00C4312B /* SpeakChessTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		2ED674F02F8EFF9A00C4312B /* SpeakChessUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2ED675012F8EFF9A00C4312B /* Build configuration list for PBXNativeTarget "SpeakChessUITests" */;
+			buildPhases = (
+				2ED674ED2F8EFF9A00C4312B /* Sources */,
+				2ED674EE2F8EFF9A00C4312B /* Frameworks */,
+				2ED674EF2F8EFF9A00C4312B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2ED674F32F8EFF9A00C4312B /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				2ED674F42F8EFF9A00C4312B /* SpeakChessUITests */,
+			);
+			name = SpeakChessUITests;
+			packageProductDependencies = (
+			);
+			productName = SpeakChessUITests;
+			productReference = 2ED674F12F8EFF9A00C4312B /* SpeakChessUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2ED674CD2F8EFF9800C4312B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					2ED674D42F8EFF9800C4312B = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					2ED674E62F8EFF9A00C4312B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 2ED674D42F8EFF9800C4312B;
+					};
+					2ED674F02F8EFF9A00C4312B = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 2ED674D42F8EFF9800C4312B;
+					};
+				};
+			};
+			buildConfigurationList = 2ED674D02F8EFF9800C4312B /* Build configuration list for PBXProject "SpeakChess" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2ED674CC2F8EFF9800C4312B;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 2ED674D62F8EFF9800C4312B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2ED674D42F8EFF9800C4312B /* SpeakChess */,
+				2ED674E62F8EFF9A00C4312B /* SpeakChessTests */,
+				2ED674F02F8EFF9A00C4312B /* SpeakChessUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2ED674D32F8EFF9800C4312B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ED674E52F8EFF9A00C4312B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ED674EF2F8EFF9A00C4312B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2ED674D12F8EFF9800C4312B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ED674E32F8EFF9A00C4312B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2ED674ED2F8EFF9A00C4312B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2ED674E92F8EFF9A00C4312B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2ED674D42F8EFF9800C4312B /* SpeakChess */;
+			targetProxy = 2ED674E82F8EFF9A00C4312B /* PBXContainerItemProxy */;
+		};
+		2ED674F32F8EFF9A00C4312B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2ED674D42F8EFF9800C4312B /* SpeakChess */;
+			targetProxy = 2ED674F22F8EFF9A00C4312B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		2ED674F92F8EFF9A00C4312B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		2ED674FA2F8EFF9A00C4312B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2ED674FC2F8EFF9A00C4312B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cade.SpeakChess;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2ED674FD2F8EFF9A00C4312B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cade.SpeakChess;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		2ED674FF2F8EFF9A00C4312B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cade.SpeakChessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeakChess.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpeakChess";
+			};
+			name = Debug;
+		};
+		2ED675002F8EFF9A00C4312B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cade.SpeakChessTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SpeakChess.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/SpeakChess";
+			};
+			name = Release;
+		};
+		2ED675022F8EFF9A00C4312B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cade.SpeakChessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SpeakChess;
+			};
+			name = Debug;
+		};
+		2ED675032F8EFF9A00C4312B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = cade.SpeakChessUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = SpeakChess;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2ED674D02F8EFF9800C4312B /* Build configuration list for PBXProject "SpeakChess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED674F92F8EFF9A00C4312B /* Debug */,
+				2ED674FA2F8EFF9A00C4312B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2ED674FB2F8EFF9A00C4312B /* Build configuration list for PBXNativeTarget "SpeakChess" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED674FC2F8EFF9A00C4312B /* Debug */,
+				2ED674FD2F8EFF9A00C4312B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2ED674FE2F8EFF9A00C4312B /* Build configuration list for PBXNativeTarget "SpeakChessTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED674FF2F8EFF9A00C4312B /* Debug */,
+				2ED675002F8EFF9A00C4312B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2ED675012F8EFF9A00C4312B /* Build configuration list for PBXNativeTarget "SpeakChessUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2ED675022F8EFF9A00C4312B /* Debug */,
+				2ED675032F8EFF9A00C4312B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2ED674CD2F8EFF9800C4312B /* Project object */;
+}
