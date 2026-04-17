@@ -1,0 +1,24 @@
+{
+  "originHash" : "f8a3b2c1d4e5f6a7b8c9d0e1f2a3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0",
+  "pins" : [
+    {
+      "identity" : "chesskit-engine",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/chesskit-app/chesskit-engine",
+      "state" : {
+        "revision" : "f9d3c1fb951cc4bbe46914ae5535968ec86e89eb",
+        "version" : "0.6.0"
+      }
+    },
+    {
+      "identity" : "chesskit-swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/chesskit-app/chesskit-swift",
+      "state" : {
+        "revision" : "44ef7a1aa9da25bf0a9606a8960591a4dde3fad2",
+        "version" : "0.17.0"
+      }
+    }
+  ],
+  "version" : 3
+}

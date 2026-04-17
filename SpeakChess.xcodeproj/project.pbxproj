@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		AA000000AA000005AA000000 /* ChessKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA000000AA000003AA000000 /* ChessKit */; };
+		AA000000AA000006AA000000 /* ChessKitEngine in Frameworks */ = {isa = PBXBuildFile; productRef = AA000000AA000004AA000000 /* ChessKitEngine */; };
+		AA000000AA000009AA000000 /* ChessKit in Frameworks */ = {isa = PBXBuildFile; productRef = AA000000AA000008AA000000 /* ChessKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		2ED674E82F8EFF9A00C4312B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +58,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA000000AA000005AA000000 /* ChessKit in Frameworks */,
+				AA000000AA000006AA000000 /* ChessKitEngine in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA000000AA000009AA000000 /* ChessKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +121,8 @@
 			);
 			name = SpeakChess;
 			packageProductDependencies = (
+				AA000000AA000003AA000000 /* ChessKit */,
+				AA000000AA000004AA000000 /* ChessKitEngine */,
 			);
 			productName = SpeakChess;
 			productReference = 2ED674D52F8EFF9800C4312B /* SpeakChess.app */;
@@ -135,6 +146,7 @@
 			);
 			name = SpeakChessTests;
 			packageProductDependencies = (
+				AA000000AA000008AA000000 /* ChessKit */,
 			);
 			productName = SpeakChessTests;
 			productReference = 2ED674E72F8EFF9A00C4312B /* SpeakChessTests.xctest */;
@@ -195,6 +207,10 @@
 			);
 			mainGroup = 2ED674CC2F8EFF9800C4312B;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				AA000000AA000001AA000000 /* XCRemoteSwiftPackageReference "chesskit-swift" */,
+				AA000000AA000002AA000000 /* XCRemoteSwiftPackageReference "chesskit-engine" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2ED674D62F8EFF9800C4312B /* Products */;
 			projectDirPath = "";
@@ -397,6 +413,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "SpeakChess uses the microphone so you can speak chess moves hands-free.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "SpeakChess uses speech recognition to convert your spoken moves into chess notation.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -424,6 +442,8 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "SpeakChess uses the microphone so you can speak chess moves hands-free.";
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = "SpeakChess uses speech recognition to convert your spoken moves into chess notation.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -550,6 +570,43 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA000000AA000001AA000000 /* XCRemoteSwiftPackageReference "chesskit-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chesskit-app/chesskit-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.17.0;
+			};
+		};
+		AA000000AA000002AA000000 /* XCRemoteSwiftPackageReference "chesskit-engine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chesskit-app/chesskit-engine";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA000000AA000003AA000000 /* ChessKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA000000AA000001AA000000 /* XCRemoteSwiftPackageReference "chesskit-swift" */;
+			productName = ChessKit;
+		};
+		AA000000AA000004AA000000 /* ChessKitEngine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA000000AA000002AA000000 /* XCRemoteSwiftPackageReference "chesskit-engine" */;
+			productName = ChessKitEngine;
+		};
+		AA000000AA000008AA000000 /* ChessKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA000000AA000001AA000000 /* XCRemoteSwiftPackageReference "chesskit-swift" */;
+			productName = ChessKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 2ED674CD2F8EFF9800C4312B /* Project object */;
 }

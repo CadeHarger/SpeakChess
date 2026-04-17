@@ -1,0 +1,46 @@
+# ─── Xcode ────────────────────────────────────────────────────────────────────
+xcuserdata/
+*.xccheckout
+*.xcscmblueprint
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# ─── Swift Package Manager ────────────────────────────────────────────────────
+.build/
+.swiftpm/
+# Keep Package.resolved so dependency versions are reproducible across machines
+!*.xcworkspace/xcshareddata/swiftpm/Package.resolved
+
+# ─── CocoaPods (not used, but just in case) ───────────────────────────────────
+Pods/
+Podfile.lock
+
+# ─── macOS ────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon?
+._*
+.Spotlight-V100
+.Trashes
+
+# ─── Simulators & Archives ────────────────────────────────────────────────────
+*.xcarchive
+
+# ─── Instruments ──────────────────────────────────────────────────────────────
+*.trace
+
+# ─── Fastlane ─────────────────────────────────────────────────────────────────
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# ─── Editor / OS ──────────────────────────────────────────────────────────────
+.idea/
+*.swp
+*~

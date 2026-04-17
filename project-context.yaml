@@ -1,0 +1,433 @@
+project: SpeakChess
+description: >
+  An iOS chess app that lets users play entirely hands-free using voice commands.
+  The player speaks moves aloud (e.g. "Knight to f three"), and the app narrates
+  the opponent's replies using text-to-speech. The AI opponent is the Stockfish
+  engine, integrated via the chesskit-engine Swift package.
+
+# ─────────────────────────────────────────────
+# TOP-LEVEL FOLDERS
+# ─────────────────────────────────────────────
+
+folders:
+  SpeakChess/:
+    description: >
+      All first-party Swift source code for the app, organised into Views,
+      ViewModels, Services, and Utilities sub-folders. This is where every
+      feature, UI screen, and business-logic change is made.
+
+  SpeakChess.xcodeproj/:
+    description: >
+      Xcode project and workspace configuration files. Contains the build
+      settings, target membership, scheme definitions, and Swift Package Manager
+      dependency resolution for the project. Rarely edited by hand; changes
+      here are typically made through Xcode.
+
+  SpeakChessTests/:
+    description: >
+      Unit test target for the app. Currently contains a placeholder test file;
+      this is where automated unit tests for ViewModels, Utilities, and Services
+      should be added.
+
+  SpeakChessUITests/:
+    description: >
+      UI test target for the app. Contains launch and interaction tests driven
+      by XCTest; used to verify end-to-end user flows from the perspective of
+      the simulator or device.
+
+
+# ─────────────────────────────────────────────
+# SpeakChess/ — APP ENTRY POINT
+# ─────────────────────────────────────────────
+
+  SpeakChess/Assets.xcassets/:
+    description: >
+      Xcode asset catalog containing the app icon and accent color definitions.
+      Edit here to change the app's icon or primary tint color.
+
+  SpeakChess/SpeakChess.xcdatamodeld/:
+    description: >
+      Core Data model file (currently unused / legacy scaffold). Kept from the
+      initial Xcode template; can be removed if Core Data persistence is not
+      needed.
+
+files:
+  SpeakChess/SpeakChessApp.swift:
+    description: >
+      The SwiftUI app entry point annotated with @main. It creates the root
+      WindowGroup and sets HomeView as the initial screen. Any app-level
+      environment objects or startup configuration would be added here.
+
+# ─────────────────────────────────────────────
+# SpeakChess/Views/
+# ─────────────────────────────────────────────
+
+  SpeakChess/Views/HomeView.swift:
+    description: >
+      The landing screen shown on app launch. Displays the SpeakChess logo,
+      a "New Game" button that navigates to NewGameView, a "Resume Game"
+      button (shown only when an in-progress SavedGame exists) that restores
+      the board to the last ongoing game, a "History" button to HistoryView,
+      and a "Settings" button to SettingsView.
+
+  SpeakChess/Views/NewGameView.swift:
+    description: >
+      A form screen where the player configures a new game before starting.
+      Lets the user pick their color (white or black) and set the Stockfish
+      difficulty level (0–20) via a labeled slider, then navigates to GameView
+      with those parameters. Difficulty labels: Beginner (0–3), Intermediate
+      (4–7), Advanced (8–12), Expert (13–17), Master (18–20).
+
+  SpeakChess/Views/GameView.swift:
+    description: >
+      The main in-game screen that orchestrates the full play session. Composes
+      the chessboard, move history bar, status text, resign/new-game/undo actions,
+      and the pawn promotion overlay. Wires GameManager, EngineManager,
+      SpeechRecognitionService, and SpeechSynthesisService together: player taps
+      and spoken moves both drive the game, the bot's reply is narrated via TTS,
+      and the mic restarts automatically 1.0 s after TTS finishes (delay prevents
+      the speaker audio from being fed back into the recogniser). Includes a mic
+      toggle button, live transcription preview bar, and listening-state indicator.
+      Voice commands "undo", "repeat"/"again" are intercepted before move parsing:
+      "undo" calls undoLastTwoMoves(); "repeat"/"again" replays the last spoken text.
+      On a valid player move the raw transcription is echoed back via TTS (with a
+      check/checkmate suffix if applicable), prepended to the bot's narration as one
+      combined utterance so neither is interrupted. The speak(_:) helper records every
+      utterance in lastSpokenText so "repeat" always knows what to replay.
+      Displays captured pieces rows above (pieces taken from the bot) and below
+      (pieces taken from the player) the board, plus a material-advantage label
+      (+N) on the side that is ahead. Each row shows Unicode chess piece symbols
+      ordered Q→R→B→N→P and is hidden when empty.
+      requestBotMove() delegates to EngineManager.requestBestMove() which
+      automatically restarts the engine and retries once on timeout; on double
+      failure the view speaks an error message and clears isWaitingForBot.
+      Auto-saves in-progress games after every move and finalises the record on
+      game-end. Accepts an optional resumeGame parameter to restore a prior session.
+
+  SpeakChess/Views/HistoryView.swift:
+    description: >
+      Displays a reverse-chronological list of completed (non-ongoing) saved games
+      using a @Query on SavedGame filtered to exclude in-progress records. Each row
+      shows the outcome icon, result text, player color, move count, skill level,
+      and date. Tapping a row navigates to GameReviewView. Supports swipe-to-delete.
+      Shows a ContentUnavailableView when no finished games exist yet.
+
+  SpeakChess/Views/GameReviewView.swift:
+    description: >
+      Read-only move-by-move replay of a SavedGame. Uses ReviewManager for board
+      state and AnalysisManager for Stockfish evaluation. Layout: metadata header,
+      board (player's perspective), horizontal move list, navigation controls
+      (|← ← N/T → →|), and a collapsible analysis panel toggled by a Switch.
+      The analysis panel shows a horizontal evaluation bar (White left / Black
+      right), the top score, and up to 3 PV lines with inline move numbers.
+      Analysis auto-restarts on navigation when enabled. Swipe left/right on the
+      view steps through moves one at a time.
+      Navigation bar contains an export Menu (↑ icon) with three options:
+      "Share PGN" (native share sheet via ShareLink), "Copy Game PGN" (copies
+      full PGN to clipboard), and "Copy Position FEN" (copies the current replay
+      board FEN to clipboard). A brief toast notification confirms clipboard copies.
+
+  SpeakChess/Views/ChessBoardView.swift:
+    description: >
+      A pure SwiftUI rendering of the 8×8 chessboard. It draws each square
+      with the correct color, overlays legal-move dots and highlights for the
+      selected piece, last move, and king-in-check, renders Unicode piece
+      symbols, and reports square taps back to the caller via a callback.
+      Supports three selectable color themes (Classic, Green, Blue) via the
+      BoardTheme enum persisted with @AppStorage("boardTheme"). Each theme
+      provides distinct light/dark/selected/last-move square colors.
+
+  SpeakChess/Views/SettingsView.swift:
+    description: >
+      A Form-based settings screen reachable from HomeView. Sections: Sound
+      (toggle sound effects), Voice (speaking-speed slider, 0.2–0.9, stored in
+      AppStorage("voiceRate")), Board (segmented theme picker + live mini-board
+      preview), and About (app version + engine info). All preferences are
+      persisted via @AppStorage / UserDefaults and take effect immediately across
+      the rest of the app.
+
+# ─────────────────────────────────────────────
+# SpeakChess/ViewModels/
+# ─────────────────────────────────────────────
+
+  SpeakChess/ViewModels/GameManager.swift:
+    description: >
+      The central game-state ObservableObject. Owns the ChessKit Board, tracks
+      move history, selected squares, legal moves, and game outcome, and exposes
+      methods for player square taps (handleSquareTap), applying the bot's LAN
+      move (applyBotMove), applying a voice-parsed move (applyVoiceMove),
+      handling pawn promotion, and resigning. Also provides restoreGame(moveSANs:as:)
+      to rebuild board state from a SAN list (used when resuming a saved game) and
+      undoLastTwoMoves() to remove the last player+bot half-move pair and replay
+      the remaining history. This is the single source of truth for board state.
+      Exposes CapturedPieceCount (struct with pawns/knights/bishops/rooks/queens
+      counts, materialValue, and symbols(color:) for Unicode display), plus computed
+      properties capturedByPlayer, capturedByBot, and materialAdvantage (positive =
+      player ahead) derived by diffing the live board against the 16-piece starting army.
+
+  SpeakChess/ViewModels/AnalysisManager.swift:
+    description: >
+      Manages a dedicated Stockfish engine instance for post-game position
+      analysis (separate from the gameplay EngineManager). startEngine() configures
+      the NNUE evaluation files (nn-1111cefa1111.nnue and nn-37f18f62d772.nnue,
+      located via bundledResourceURL) before sending any other options — omitting
+      this caused an immediate engine crash. Sets Skill Level 20, MultiPV 3, and
+      searches to depth 18. Parses EngineResponse.info lines in real-time,
+      normalises scores to White's perspective, and converts engine PV (LAN) into
+      readable SAN by rebuilding the board from the game's move history. Publishes
+      lines ([AnalysisLine]), isAnalyzing, and currentDepth. AnalysisLine and
+      AnalysisScore are defined in this file.
+
+  SpeakChess/ViewModels/ReviewManager.swift:
+    description: >
+      ObservableObject that drives move-by-move replay in GameReviewView. Holds
+      a ChessKit Board rebuilt from scratch on every navigation step (stepForward,
+      stepBack, jumpToStart, jumpToEnd) by replaying the stored SAN move list.
+      Rebuilding from scratch avoids the need to copy a Board class instance.
+      Publishes replayBoard, currentMoveIndex, lastAppliedMove, and progressFraction.
+
+  SpeakChess/ViewModels/EngineManager.swift:
+    description: >
+      Manages the lifecycle of the Stockfish engine via ChessKitEngine. Starts
+      and stops the engine, configures NNUE files via configureEngineOptions()
+      (called on every start so restarts re-apply settings), and returns the
+      engine's best move in UCI LAN format (e.g. "e2e4"). Publishes isThinking.
+      Difficulty tiers (set via skillLevel 0–20): Beginner (0–3) uses go depth 1,
+      Intermediate (4–7) uses go depth 4, Advanced (8–12) uses go movetime 600 ms,
+      Expert (13–17) uses go movetime 1500 ms, Master (18–20) uses go movetime 3000 ms.
+      requestBestMove(fen:) races the response loop against a per-tier timeout
+      (3–30 s) using withTaskGroup. On first timeout it fully stops and restarts
+      the engine process (via configureEngineOptions) then calls attemptSearch once
+      more; only a double failure returns nil. This prevents the game from locking
+      up when Stockfish hangs on a position.
+
+# ─────────────────────────────────────────────
+# SpeakChess/Models/
+# ─────────────────────────────────────────────
+
+  SpeakChess/Models/SavedGame.swift:
+    description: >
+      The SwiftData @Model class for a chess game. Stores the date, player color,
+      outcome (as a raw string: "ongoing", "playerWins", "botWins",
+      "draw:stalemate", etc.), Stockfish skill level, and an ordered array of SAN
+      move strings. The isOngoing computed property (outcomeRaw == "ongoing") lets
+      HomeView surface the latest in-progress game for resumption, and HistoryView
+      filter it out of the completed-games list. Exposes display-ready computed
+      properties (outcomeDisplay, outcomeSymbol, formattedDate, etc.) used by
+      HistoryView and GameReviewView. Also exposes pgn: String — a fully-formatted
+      PGN with seven-tag roster (Event, Date, White, Black, Result) and the move
+      text, importable by Lichess and other PGN-compatible tools. No ChessKit
+      imports — kept clean of library coupling.
+
+# ─────────────────────────────────────────────
+# SpeakChess/Services/
+# ─────────────────────────────────────────────
+
+  SpeakChess/Services/SpeechRecognitionService.swift:
+    description: >
+      Wraps Apple's SFSpeechRecognizer and AVAudioEngine to provide continuous,
+      on-device voice recognition. Handles microphone and speech permissions,
+      streams partial transcriptions to the UI, and fires a final transcription
+      callback after 1.5 seconds of silence or when the recognizer marks the
+      result as final. This is the entry point for capturing a player's spoken move.
+      handleRecognitionResult() guards on recognitionState == .listening to drop
+      stale callbacks that arrive after stopListening() (e.g. the framework fires
+      one final isFinal=true callback when finish() is called by the silence timer,
+      which would otherwise double-deliver the same transcription and cause commands
+      like "undo" to execute twice). Uses en-US locale; on-device recognition is
+      disabled in the simulator to avoid defaulting to the Mac's system locale.
+
+  SpeakChess/Services/SpeechSynthesisService.swift:
+    description: >
+      A thin wrapper around AVSpeechSynthesizer that speaks arbitrary text
+      aloud to the user. Publishes isSpeaking so the game can pause the
+      microphone while the app is talking, preventing the TTS output from being
+      fed back into the speech recognizer. Reads voiceRate from UserDefaults on
+      every speak() call so settings changes apply immediately without restarting.
+
+  SpeakChess/Services/SoundService.swift:
+    description: >
+      A singleton (SoundService.shared) that plays short AudioToolbox system
+      sounds for game events: playMove() (normal piece placement), playCapture()
+      (piece takes another), playCheck() (king in check), playGameEnd()
+      (checkmate / resignation / draw). All methods respect the "soundEnabled"
+      UserDefaults flag set by SettingsView and are safe to call from any thread.
+
+# ─────────────────────────────────────────────
+# SpeakChess/Utilities/
+# ─────────────────────────────────────────────
+
+  SpeakChess/Utilities/VoiceMoveParser.swift:
+    description: >
+      Converts a raw speech-recognition string into a legal chess move for the
+      current board position using exact/alias matching — no fuzzy scoring or
+      confidence threshold. Strategy: (1) normalize the transcription (phrase
+      substitutions → splitLetterDigit → canonicalise → noise-word filter);
+      (2) enumerate all legal moves and generate spoken forms for each; (3) also
+      normalize each form; (4) return the first move whose normalized form exactly
+      equals the normalized transcription. This prevents partial-word matches from
+      playing the wrong move (e.g. "pawn takes d6" can never match a plain pawn
+      push to d6 because "pawn takes d six" ≠ "pawn d six").
+      normalize() applies phraseSubstitutions first (multi-word mis-recognition
+      fixes: "ponte"→"pawn takes", "rookie"→"rook e", "before"→"b four",
+      "detects"→"d takes", "she takes"→"c takes", "rotate"→"rook takes"), then
+      splitLetterDigit (inserts spaces at letter↔digit boundaries so "d4"→"d 4"),
+      then canonicalise (homophones: "night"→"knight", "pond"→"pawn", "see"→"c",
+      digit ranks "4"→"four", capture aliases "capture"→"takes", etc.), then
+      noiseWord filter (strips "the", "an", "move", "illegal", etc.; "a" is
+      intentionally excluded because it is also the a-file).
+      spokenForms() generates all natural phrasings per move type: pawn pushes
+      include source-square and "pawn to" variants; pawn captures include
+      "pawn <src> takes <dest>" for disambiguation when multiple pawns can capture
+      the same square; piece moves include source-square disambiguation variants;
+      castling includes "castle", "o o", "kingside", etc.
+      Note: "undo", "repeat", and "again" are intercepted in GameView before
+      VoiceMoveParser is called and will never reach parse().
+
+  SpeakChess/Utilities/MoveNarrator.swift:
+    description: >
+      Converts a ChessKit Move object into a natural English phrase suitable for
+      text-to-speech playback (e.g. "Knight to f three. Check."). Handles all
+      move types including captures, castling, en passant, and promotion, and
+      appends a postfix for check, checkmate, or draw outcomes. Used to narrate
+      the bot's moves. The player's own moves are echoed as the raw transcription
+      (what the user said) by GameView.buildPlayerEcho(), not by this narrator.
+
+# ─────────────────────────────────────────────
+# TEST TARGETS
+# ─────────────────────────────────────────────
+
+  SpeakChessTests/SpeakChessTests.swift:
+    description: >
+      Unit test file (Swift Testing framework) covering the app's core logic.
+      Test suites included: VoiceMoveParser normalisation (noise words, homophones,
+      rank/file mapping), VoiceMoveParser parse() for common move types (pawn,
+      knight, castling, promotion, captures, homophones), VoiceMoveParser
+      normalize for voice commands (undo/repeat/again survive filtering; neither
+      parses as a chess move), MoveNarrator narration phrases (standard moves,
+      captures, castling, check, checkmate), MoveNarrator player-echo readback
+      phrases (raw transcript + check/checkmate suffix; combined utterance format),
+      SavedGame isOngoing property and outcomeDisplay/outcomeSymbol for in-progress
+      state, GameManager restoreGame() (empty and populated SAN lists, player color),
+      GameManager undoLastTwoMoves() (no-op, removal, board state, selection reset),
+      GameManager undo-via-voice edge cases (game over, exactly 2 moves, color
+      preservation, 1-move boundary), BoardTheme (rawValue round-trip, distinct
+      colors, displayName, allCases count), AnalysisScore (displayString, barFraction,
+      boundary clamping). 115 tests total, all passing.
+
+  SpeakChessUITests/SpeakChessUITests.swift:
+    description: >
+      Placeholder UI test file. Interaction tests that drive the app through
+      the simulator (e.g. tapping squares, verifying navigation) should be
+      written here.
+
+  SpeakChessUITests/SpeakChessUITestsLaunchTests.swift:
+    description: >
+      Auto-generated Xcode launch test that verifies the app starts and takes
+      a screenshot of the initial screen. Minimal in scope.
+
+# ─────────────────────────────────────────────
+# chesskit-swift-inspect — KEY SOURCE FILES
+# (for reference only; do not edit)
+# ─────────────────────────────────────────────
+
+chesskit_swift_reference:
+  Sources/ChessKit/Board.swift:
+    description: >
+      The primary chess engine type. Manages a Position, validates and executes
+      moves, detects check/checkmate/draw/promotion states, and provides legal
+      move enumeration per piece. The app's GameManager holds a Board instance.
+
+  Sources/ChessKit/Position.swift:
+    description: >
+      Represents a complete chess position: which pieces are on which squares,
+      whose turn it is, castling rights, and en passant state. Also exposes the
+      FEN string for the current position, which EngineManager sends to Stockfish.
+
+  Sources/ChessKit/Move.swift:
+    description: >
+      Describes a single chess move including the piece moved, start and end
+      squares, any captured piece, and the SAN notation string. MoveNarrator
+      and GameManager both consume Move values.
+
+  Sources/ChessKit/Piece.swift:
+    description: >
+      Defines the Piece type (kind + color + square) and the Piece.Kind and
+      Piece.Color enumerations used everywhere in the app.
+
+  Sources/ChessKit/Square.swift:
+    description: >
+      Represents a board square by file (a–h) and rank (1–8). VoiceMoveParser
+      and ChessBoardView both convert between Square values and human-readable
+      coordinate strings.
+
+  Sources/ChessKit/Game.swift:
+    description: >
+      Higher-level game container that wraps Board and tracks a full move tree
+      (including variations). Not currently used by the app, but available for
+      future PGN import/export or game-history features.
+
+  Sources/ChessKit/Parsers/FENParser.swift:
+    description: >
+      Parses FEN strings into Position objects and serialises Position objects
+      back to FEN. Used internally by ChessKit; the app accesses FEN via
+      board.position.fen.
+
+  Sources/ChessKit/Parsers/SANParser.swift:
+    description: >
+      Parses Standard Algebraic Notation (e.g. "Nf3", "exd5") into Move
+      objects. Used internally by ChessKit when processing move notation.
+
+  Sources/ChessKit/Parsers/EngineLANParser.swift:
+    description: >
+      Parses Long Algebraic Notation move strings (e.g. "e2e4", "e7e8q") as
+      produced by UCI chess engines like Stockfish into Move objects. Used by
+      GameManager.applyBotMove to translate the engine's reply into a board move.
+
+  Sources/ChessKit/Bitboards/:
+    description: >
+      Internal bitboard representation (Bitboard, PieceSet, Attacks) used by
+      ChessKit for high-performance legal move generation. Not referenced
+      directly by the app.
+
+  Sources/ChessKit/MoveTree/:
+    description: >
+      A tree data structure that stores a game's full move history including
+      variations. Used by Game.swift; not directly used by the app yet.
+
+# ─────────────────────────────────────────────
+# chesskit-engine-inspect — KEY SOURCE FILES
+# (for reference only; do not edit)
+# ─────────────────────────────────────────────
+
+chesskit_engine_reference:
+  Sources/ChessKitEngine/Engine.swift:
+    description: >
+      The main public Swift class that wraps a chess engine process behind an
+      async/await API. The app instantiates Engine(type: .stockfish) inside
+      EngineManager and calls start(), stop(), send(command:), and
+      responseStream to communicate with the engine.
+
+  Sources/ChessKitEngine/EngineType.swift:
+    description: >
+      An enumeration of the available engine backends (Stockfish, Lc0). The
+      app always uses .stockfish.
+
+  Sources/ChessKitEngine/EngineCommand/:
+    description: >
+      Swift types modelling outgoing UCI commands sent to the engine, including
+      position (with FEN or startpos), go (with movetime, depth, or other UCI
+      go parameters), setoption, stop, and isready. EngineManager constructs
+      and sends these commands.
+
+  Sources/ChessKitEngine/EngineResponse/:
+    description: >
+      Swift types modelling incoming UCI responses from the engine, including
+      readyok and bestmove. EngineManager awaits these from the responseStream
+      to know when the engine is ready and what move it chose.
+
+  Sources/ChessKitEngineCore/:
+    description: >
+      Objective-C++/C++ layer that embeds the compiled Stockfish and Lc0 engine
+      binaries and bridges them to Swift via EngineMessenger. This layer is
+      internal to chesskit-engine and is not called directly by the app.
